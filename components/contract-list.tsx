@@ -112,16 +112,43 @@ const contracts = [
   },
 ]
 
-export function ContractList() {
-  const [searchTerm, setSearchTerm] = useState("")
-  const [statusFilter, setStatusFilter] = useState("all")
+interface ContractListProps {
+  searchTerm?: string;
+  statusFilter?: string;
+  onSearchChange?: (value: string) => void;
+  onStatusFilterChange?: (value: string) => void;
+}
+
+export function ContractList({ 
+  searchTerm = "", 
+  statusFilter = "all", 
+  onSearchChange,
+  onStatusFilterChange
+}: ContractListProps) {
+  const [currentSearchTerm, setCurrentSearchTerm] = useState(searchTerm)
+  const [currentStatusFilter, setCurrentStatusFilter] = useState(statusFilter)
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value
+    setCurrentSearchTerm(value)
+    if (onSearchChange) {
+      onSearchChange(value)
+    }
+  }
+
+  const handleStatusFilterChange = (value: string) => {
+    setCurrentStatusFilter(value)
+    if (onStatusFilterChange) {
+      onStatusFilterChange(value)
+    }
+  }
 
   const filteredContracts = contracts.filter(
     (contract) =>
-      (contract.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        contract.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        contract.customer.toLowerCase().includes(searchTerm.toLowerCase())) &&
-      (statusFilter === "all" || contract.status === statusFilter),
+      (contract.title.toLowerCase().includes(currentSearchTerm.toLowerCase()) ||
+        contract.id.toLowerCase().includes(currentSearchTerm.toLowerCase()) ||
+        contract.customer.toLowerCase().includes(currentSearchTerm.toLowerCase())) &&
+      (currentStatusFilter === "all" || contract.status === currentStatusFilter),
   )
 
   const getStatusColor = (status: string) => {
@@ -145,47 +172,55 @@ export function ContractList() {
     <Card className="tech-card">
       <CardContent className="p-6">
         <div className="space-y-4">
-          <div className="flex flex-col sm:flex-row justify-between gap-4">
-            <div className="flex items-center gap-2">
-              <div className="relative flex-1">
-                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-                <Input
-                  type="search"
-                  placeholder="搜索合同..."
-                  className="pl-8 w-full sm:w-[300px]"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                />
+          {(onSearchChange === undefined || onStatusFilterChange === undefined) && (
+            <div className="flex flex-col sm:flex-row justify-between gap-4">
+              <div className="flex items-center gap-2">
+                {onSearchChange === undefined && (
+                  <div className="relative flex-1">
+                    <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                    <Input
+                      type="search"
+                      placeholder="搜索合同..."
+                      className="pl-8 w-full sm:w-[300px]"
+                      value={currentSearchTerm}
+                      onChange={handleSearchChange}
+                    />
+                  </div>
+                )}
+                {onStatusFilterChange === undefined && (
+                  <Select value={currentStatusFilter} onValueChange={handleStatusFilterChange}>
+                    <SelectTrigger className="w-[180px]">
+                      <SelectValue placeholder="筛选状态" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">所有状态</SelectItem>
+                      <SelectItem value="已签署">已签署</SelectItem>
+                      <SelectItem value="待审核">待审核</SelectItem>
+                      <SelectItem value="待签署">待签署</SelectItem>
+                      <SelectItem value="草稿">草稿</SelectItem>
+                      <SelectItem value="即将到期">即将到期</SelectItem>
+                    </SelectContent>
+                  </Select>
+                )}
               </div>
-              <Select value={statusFilter} onValueChange={setStatusFilter}>
-                <SelectTrigger className="w-[180px]">
-                  <SelectValue placeholder="筛选状态" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">所有状态</SelectItem>
-                  <SelectItem value="已签署">已签署</SelectItem>
-                  <SelectItem value="待审核">待审核</SelectItem>
-                  <SelectItem value="待签署">待签署</SelectItem>
-                  <SelectItem value="草稿">草稿</SelectItem>
-                  <SelectItem value="即将到期">即将到期</SelectItem>
-                </SelectContent>
-              </Select>
+              {onSearchChange === undefined && onStatusFilterChange === undefined && (
+                <div className="flex gap-2">
+                  <Button variant="outline" size="icon">
+                    <Download className="h-4 w-4" />
+                    <span className="sr-only">导出</span>
+                  </Button>
+                  <Button variant="outline" size="icon">
+                    <Filter className="h-4 w-4" />
+                    <span className="sr-only">高级筛选</span>
+                  </Button>
+                  <Button className="gap-2">
+                    <Plus className="h-4 w-4" />
+                    新建合同
+                  </Button>
+                </div>
+              )}
             </div>
-            <div className="flex gap-2">
-              <Button variant="outline" size="icon">
-                <Download className="h-4 w-4" />
-                <span className="sr-only">导出</span>
-              </Button>
-              <Button variant="outline" size="icon">
-                <Filter className="h-4 w-4" />
-                <span className="sr-only">高级筛选</span>
-              </Button>
-              <Button className="gap-2">
-                <Plus className="h-4 w-4" />
-                新建合同
-              </Button>
-            </div>
-          </div>
+          )}
           <div className="rounded-lg border bg-card">
             <Table>
               <TableHeader>
@@ -241,7 +276,7 @@ export function ContractList() {
                             下载PDF
                           </DropdownMenuItem>
                           <DropdownMenuSeparator />
-                          <DropdownMenuItem className="text-red-500">
+                          <DropdownMenuItem destructive>
                             <Trash2 className="mr-2 h-4 w-4" />
                             删除合同
                           </DropdownMenuItem>

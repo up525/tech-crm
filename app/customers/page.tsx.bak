@@ -29,15 +29,15 @@ export default function CustomersPage() {
               onChange={handleSearchChange}
             />
           </div>
-          <Button variant="secondary" size="sm" className="mr-1">
+          <Button variant="outline" size="sm" className="mr-1">
             <RefreshCcw className="h-4 w-4 mr-1" />
             刷新
           </Button>
-          <Button variant="secondary" size="sm" className="mr-1">
+          <Button variant="outline" size="sm" className="mr-1">
             <Download className="h-4 w-4 mr-1" />
             导出
           </Button>
-          <Button variant="default" size="sm">
+          <Button variant="default" size="sm"></Button>
             <PlusCircle className="h-4 w-4 mr-1" />
             新增客户
           </Button>
@@ -51,4 +51,5 @@ export default function CustomersPage() {
       />
     </DashboardLayout>
   )
-} 
+}
+
