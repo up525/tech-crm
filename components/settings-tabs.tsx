@@ -54,7 +54,7 @@ export function SettingsTabs() {
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="email">邮箱</Label>
-                    <Input id="email" defaultValue="admin@techcrm.com" />
+                    <Input id="email" defaultValue="admin@客户销售管理系统.com" />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="phone">电话</Label>

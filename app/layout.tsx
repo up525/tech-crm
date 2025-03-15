@@ -9,7 +9,7 @@ const inter = Inter({ subsets: ["latin"] })
 
 // 定义网站元数据，包括标题和描述
 export const metadata: Metadata = {
-  title: "TechCRM - 客户销售管理系统", // 网站标题
+  title: "客户销售管理系统 - 客户销售管理系统", // 网站标题
   description: "高科技感的客户销售管理系统", // 网站描述
   generator: 'v0.dev' // 生成器标识
 }

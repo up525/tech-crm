@@ -16,7 +16,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
       <header className="sticky top-0 z-50 flex h-16 items-center gap-4 border-b bg-background/95 px-6 backdrop-blur">
         <div className="flex items-center gap-2 font-bold text-xl text-primary">
           <div className="h-8 w-8 rounded-full bg-primary flex items-center justify-center text-white">T</div>
-          TechCRM
+          客户销售管理系统
         </div>
         <div className="flex-1">
           <form className="hidden sm:block">
@@ -44,17 +44,6 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
           <div className="flex h-full max-h-screen flex-col">
             <div className="flex-1 overflow-auto py-2">
               <MainNav />
-            </div>
-            <div className="border-t p-4">
-              <div className="flex items-center gap-2 rounded-lg bg-primary/10 p-4">
-                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-white">
-                  <span className="text-xs font-bold">PRO</span>
-                </div>
-                <div>
-                  <p className="text-sm font-medium">升级到专业版</p>
-                  <p className="text-xs text-muted-foreground">获取更多功能</p>
-                </div>
-              </div>
             </div>
           </div>
         </aside>

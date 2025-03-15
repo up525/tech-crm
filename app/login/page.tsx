@@ -36,7 +36,7 @@ export default function LoginPage() {
               T
             </div>
           </div>
-          <CardTitle className="text-2xl font-bold">登录到 TechCRM</CardTitle>
+          <CardTitle className="text-2xl font-bold">登录到 客户销售管理系统</CardTitle>
           <CardDescription>输入您的账号信息以访问客户销售管理系统</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">

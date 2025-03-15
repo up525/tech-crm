@@ -28,7 +28,7 @@ export function UserMenu() {
         <DropdownMenuLabel>
           <div className="flex flex-col space-y-1">
             <p className="text-sm font-medium leading-none">管理员</p>
-            <p className="text-xs leading-none text-muted-foreground">admin@techcrm.com</p>
+            <p className="text-xs leading-none text-muted-foreground">admin@客户销售管理系统.com</p>
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
