@@ -56,11 +56,10 @@ Tech-CRM 项目使用了基于 shadcn/ui 的自定义组件库，这些组件位
 | CalendarView | components/calendar-view.tsx | 日历视图组件，展示日历和日程安排 |
 | ActivityCalendar | components/activity-calendar.tsx | 活动日历组件，展示用户活动和事件 |
 
-### 消息和通知组件
+### 通知组件
 
 | 组件名称 | 文件路径 | 功能描述 |
 |---------|----------|---------|
-| MessageCenter | components/message-center.tsx | 消息中心组件，管理和展示用户消息 |
 | Toast | components/ui/toast.tsx | 提示通知组件，显示临时消息或通知 |
 
 ### 主题和样式组件

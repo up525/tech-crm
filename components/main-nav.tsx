@@ -8,7 +8,6 @@ import {
   Users,
   BarChart3,
   Settings,
-  MessageSquare,
   ShoppingCart,
   FileText,
   Calendar,
@@ -38,11 +37,6 @@ const navItems = [
     name: "数据分析",
     href: "/analytics",
     icon: BarChart3,
-  },
-  {
-    name: "消息中心",
-    href: "/messages",
-    icon: MessageSquare,
   },
   {
     name: "合同管理",
